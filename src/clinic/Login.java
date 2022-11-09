@@ -1,9 +1,7 @@
 package clinic;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;  
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
@@ -20,11 +18,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        CreateAccountBtn = new javax.swing.JButton();
-        LoginBtn = new javax.swing.JButton();
-        ExitBtn = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        registerBtn = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JLabel();
+        pesel = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -47,47 +45,52 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Hasło:");
 
-        CreateAccountBtn.setBackground(new java.awt.Color(255, 0, 0));
-        CreateAccountBtn.setFont(new java.awt.Font("Verdana", 0, 22)); // NOI18N
-        CreateAccountBtn.setForeground(new java.awt.Color(255, 255, 255));
-        CreateAccountBtn.setText("Załóż konto");
-        CreateAccountBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        registerBtn.setBackground(new java.awt.Color(255, 0, 0));
+        registerBtn.setFont(new java.awt.Font("Verdana", 0, 22)); // NOI18N
+        registerBtn.setForeground(new java.awt.Color(255, 255, 255));
+        registerBtn.setText("Załóż konto");
+        registerBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CreateAccountBtnMouseClicked(evt);
+                registerBtnMouseClicked(evt);
             }
         });
-        CreateAccountBtn.addActionListener(new java.awt.event.ActionListener() {
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateAccountBtnActionPerformed(evt);
+                registerBtnActionPerformed(evt);
             }
         });
 
-        LoginBtn.setBackground(new java.awt.Color(255, 0, 0));
-        LoginBtn.setFont(new java.awt.Font("Verdana", 0, 22)); // NOI18N
-        LoginBtn.setForeground(new java.awt.Color(255, 255, 255));
-        LoginBtn.setText("Zaloguj się");
-        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtnActionPerformed(evt);
-            }
-        });
-
-        ExitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit_btn.png"))); // NOI18N
-        ExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        loginBtn.setBackground(new java.awt.Color(255, 0, 0));
+        loginBtn.setFont(new java.awt.Font("Verdana", 0, 22)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setText("Zaloguj się");
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ExitBtnMouseClicked(evt);
+                loginBtnMouseClicked(evt);
             }
         });
-
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        exitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit_btn.png"))); // NOI18N
+        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitBtnMouseClicked(evt);
+            }
+        });
+
+        pesel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        pesel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                peselActionPerformed(evt);
+            }
+        });
+
+        password.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -100,22 +103,22 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(64, 64, 64)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(pesel, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(password))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(261, 261, 261))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(250, 250, 250)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                .addComponent(ExitBtn)
+                .addComponent(exitBtn)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CreateAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
         jPanel2Layout.setVerticalGroup(
@@ -124,19 +127,19 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(ExitBtn))
+                    .addComponent(exitBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jTextField3))
+                    .addComponent(pesel))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(CreateAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
@@ -172,32 +175,52 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LoginBtnActionPerformed
+    }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void CreateAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAccountBtnActionPerformed
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CreateAccountBtnActionPerformed
+    }//GEN-LAST:event_registerBtnActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void peselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peselActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_peselActionPerformed
 
-    private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
+    private void exitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseClicked
         System.exit(1);
-    }//GEN-LAST:event_ExitBtnMouseClicked
+    }//GEN-LAST:event_exitBtnMouseClicked
 
-    private void CreateAccountBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateAccountBtnMouseClicked
+    private void registerBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseClicked
         new SignUp().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_CreateAccountBtnMouseClicked
-    
+    }//GEN-LAST:event_registerBtnMouseClicked
     Connection con = null;
-    PreparedStatement pS = null;
-    ResultSet rS = null;
-    Statement sT = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    Statement st = null;
     
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
+        if(pesel.getText().isEmpty() || password.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Aby się zalogować podaj pesel i hasło");
+        } else {
+            String query = "SELECT * FROM patients WHERE pesel='"+pesel.getText()+"' AND password="+password.getText()+"";
+            try {
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_db", "root", "");
+                st = con.createStatement();
+                rs = st.executeQuery(query);
+                if(rs.next()){
+                    new Dashboard().setVisible(true); //tutaj nieskonczone
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Zły numer pesel lub hasło");
+                }
+            }catch(Exception e) {
+                JOptionPane.showMessageDialog(this, e);
+            }
+        }
+    }//GEN-LAST:event_loginBtnMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,15 +254,15 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreateAccountBtn;
-    private javax.swing.JLabel ExitBtn;
-    private javax.swing.JButton LoginBtn;
+    private javax.swing.JLabel exitBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField pesel;
+    private javax.swing.JButton registerBtn;
     // End of variables declaration//GEN-END:variables
 }
